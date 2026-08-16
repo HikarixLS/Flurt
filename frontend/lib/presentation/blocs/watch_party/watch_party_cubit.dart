@@ -22,18 +22,23 @@ class WatchPartyCubit extends Cubit<WatchPartyState> {
 
   String get _resolvedWsUrl {
     if (kIsWeb) {
-      final host = Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost';
-      final port = 8080;
-      return 'ws://$host:$port/ws/party';
+      final host = Uri.base.host;
+      if (host.isEmpty || host == 'localhost' || host == '127.0.0.1') {
+        return 'ws://localhost:8080/ws/party';
+      }
+      // If deployed on github.io or custom domain without local server, can connect to wss
+      return 'wss://$host/ws/party';
     }
     return ApiConstants.defaultWsUrl;
   }
 
   String get _resolvedHttpBackend {
     if (kIsWeb) {
-      final host = Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost';
-      final port = 8080;
-      return 'http://$host:$port';
+      final host = Uri.base.host;
+      if (host.isEmpty || host == 'localhost' || host == '127.0.0.1') {
+        return 'http://localhost:8080';
+      }
+      return 'https://$host';
     }
     return ApiConstants.defaultHttpBackend;
   }

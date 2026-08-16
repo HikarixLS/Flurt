@@ -1,0 +1,45 @@
+name: Deploy Flurt to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# Permissions for deploying to GitHub Pages branch
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          flutter pub get
+
+      - name: Build Flutter Web with Base Href
+        run: |
+          cd frontend
+          flutter build web --base-href "/Flurt/" --release
+
+      - name: Add 404.html for SPA Routing Support
+        run: |
+          cp frontend/build/web/index.html frontend/build/web/404.html
+
+      - name: Deploy to GitHub Pages Branch (gh-pages)
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: frontend/build/web
+          branch: gh-pages
