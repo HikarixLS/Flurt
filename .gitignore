@@ -1,0 +1,26 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+Thumbs.db
+.history
+
+# IDEs
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+
+# Flutter / Dart / Pub build artifacts
+**/.dart_tool/
+**/.pub/
+**/.pub-cache/
+**/build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Packages
+**/node_modules/
