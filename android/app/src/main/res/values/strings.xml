@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Flurt Movie</string>
+    <string name="title_activity_main">Flurt Movie</string>
+    <string name="package_name">com.flurt.movieapp</string>
+    <string name="custom_url_scheme">com.flurt.movieapp</string>
+</resources>

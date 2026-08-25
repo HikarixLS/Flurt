@@ -1,0 +1,59 @@
+/* Android TV & 10-foot UI Mode Styles */
+
+/* Base TV Mode when enabled */
+body.tv-mode-active {
+  font-size: 18px;
+  cursor: none !important; /* Hide mouse cursor on TV */
+}
+
+/* TV Focusable Element States */
+[data-tv-focus] {
+  outline: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+
+/* TV Focus Outline / Glow Effect */
+body.tv-mode-active [data-tv-focus].tv-focused,
+[data-tv-focus]:focus-visible {
+  transform: scale(1.08) translateY(-4px) !important;
+  z-index: 50 !important;
+  box-shadow: 0 0 0 3px #ffffff, 0 0 30px rgba(0, 210, 255, 0.9), 0 12px 30px rgba(0, 0, 0, 0.8) !important;
+  border-color: #00d2ff !important;
+}
+
+body.tv-mode-active [data-tv-focus].tv-focused-primary {
+  box-shadow: 0 0 0 3px #ffffff, 0 0 35px rgba(229, 9, 20, 0.95), 0 12px 30px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Floating TV Cursor Box (Dynamic Animated Tracker) */
+.tv-cursor-box {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 14px;
+  border: 3px solid #00d2ff;
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.8), inset 0 0 15px rgba(0, 210, 255, 0.2);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
+}
+
+body.tv-mode-active .tv-cursor-box.active {
+  display: block;
+}
+
+/* 10-foot UI adjustments */
+body.tv-mode-active .container-custom {
+  max-width: 95vw;
+  padding: 0 32px;
+}
+
+body.tv-mode-active .movie-card {
+  border-radius: 16px;
+}
+
+body.tv-mode-active .badge-quality,
+body.tv-mode-active .badge-episode {
+  font-size: 13px;
+  padding: 4px 10px;
+}
